@@ -23,7 +23,8 @@ body {
 }
 
 .cat-info {
-  
+  padding: 10px;
+  padding-right: 10px;
   display: flex;
   align-items: center ;
   gap: 20px;
@@ -48,3 +49,24 @@ font-weight: bold;
 margin-right: 10px;
 font-size: 110%;
 }
+
+.loader {
+  margin-left: 70px;
+    width: 38px;
+    height: 38px;
+    border: 4px solid #0a0a0a;
+    border-bottom-color: #e9eb96;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 

@@ -1,14 +1,20 @@
 let CatBreedsArr = [];
 import { fetchBreeds } from './cat-api';
+import Notiflix from 'notiflix';
 
 const elements = {
   select: document.querySelector('.breed-select'),
   page: document.querySelector('.cat-info'),
+  loader: document.querySelector('.loadOne'),
+  loaderTwo: document.querySelector('.loadTwo'),
 };
 
 fetchBreeds()
   .then(data => {
     CatBreedsArr = data;
+    elements.loader.classList.value = 'loadOne loader hidden';
+
+    elements.select.classList.value = 'breed-select';
 
     data.map(elem => {
       elements.select.insertAdjacentHTML(
@@ -19,6 +25,7 @@ fetchBreeds()
     });
   })
   .catch(error => {
+    Notiflix.Notify.failure(`ERROR fetching - ${error}`);
     console.log(error);
   });
 
@@ -33,8 +40,9 @@ function loadBreed(evt) {
       <h2>${result.name}</h2>
       <p>${result.description}</p>
       <p><span class= "temperSpan">Temperament:</span>${result.temperament}</p>
+      
       </div>
     `;
+
   elements.page.classList.value = 'cat-info';
 }
-console.dir(elements.page);
