@@ -1,0 +1,47 @@
+body {
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  line-height: 1.29;
+  font-weight: 400;
+ 
+
+ 
+}
+
+
+
+.breed-select {
+  font-size: 20px;
+  
+  border: 2px solid;
+  box-shadow: 10px 5px 5px grey; 
+
+
+  margin-bottom: 20px;
+}
+
+.cat-info {
+  display: flex;
+  align-items: center ;
+  gap: 20px;
+  max-width: 800px;
+  border: 2px solid;
+  box-shadow: 10px 5px 5px grey; 
+
+}
+
+
+
+.catText {
+    display: flex;
+    flex-direction: column;
+}
+
+.temperSpan {
+font-style: italic;
+font-weight: bold;
+margin-right: 10px;
+font-size: 110%;
+}
