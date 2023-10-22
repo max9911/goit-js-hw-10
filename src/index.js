@@ -35,4 +35,6 @@ function loadBreed(evt) {
       <p><span class= "temperSpan">Temperament:</span>${result.temperament}</p>
       </div>
     `;
+  elements.page.classList.value = 'cat-info';
 }
+console.dir(elements.page);

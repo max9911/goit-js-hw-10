@@ -23,6 +23,7 @@ body {
 }
 
 .cat-info {
+  
   display: flex;
   align-items: center ;
   gap: 20px;
@@ -32,7 +33,9 @@ body {
 
 }
 
-
+.hidden {
+  visibility: hidden;
+}
 
 .catText {
     display: flex;
