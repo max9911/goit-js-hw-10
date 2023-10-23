@@ -1,6 +1,6 @@
-let CatBreedsArr = [];
 import { fetchBreeds } from './cat-api';
 import Notiflix from 'notiflix';
+import { fetchCatByBreed } from './cat-api';
 
 const elements = {
   select: document.querySelector('.breed-select'),
@@ -9,33 +9,41 @@ const elements = {
   loaderTwo: document.querySelector('.loadTwo'),
 };
 
+let CatBreedsArr = [];
+
 fetchBreeds()
   .then(data => {
     CatBreedsArr = data;
+    console.dir(CatBreedsArr);
+
     elements.loader.classList.value = 'loadOne loader hidden';
 
-    elements.select.classList.value = 'breed-select';
-
-    data.map(elem => {
+    CatBreedsArr.map(elem => {
       elements.select.insertAdjacentHTML(
         'beforeend',
         `
       <option value="${elem.id}">${elem.name}</option>`
       );
     });
+    elements.select.classList.value = 'breed-select';
   })
   .catch(error => {
     Notiflix.Notify.failure(`ERROR fetching - ${error}`);
-    console.log(error);
   });
 
 elements.select.addEventListener('change', loadBreed);
 
 function loadBreed(evt) {
-  const result = CatBreedsArr.find(item => item.id === evt.target.value);
+  elements.loader.classList.value = 'loadOne loader';
 
-  elements.page.innerHTML = `
-      <img src="${result.image.url}" alt="${result.name}" width="300">
+  fetchCatByBreed(evt.target.value)
+    .then(data => {
+      const result = { ...data[0].breeds }[0];
+
+      console.dir(result);
+
+      elements.page.innerHTML = `
+      <img src="https://cdn2.thecatapi.com/images/${result.reference_image_id}.jpg" alt="${result.name}" width="300">
       <div class="catText">
       <h2>${result.name}</h2>
       <p>${result.description}</p>
@@ -43,6 +51,10 @@ function loadBreed(evt) {
       
       </div>
     `;
-
-  elements.page.classList.value = 'cat-info';
+      elements.loader.classList.value = 'loadOne loader hidden';
+      elements.page.classList.value = 'cat-info';
+    })
+    .catch(error => {
+      Notiflix.Notify.failure(`ERROR fetching - ${error}`);
+    });
 }

@@ -11,3 +11,14 @@ export function fetchBreeds() {
     }
   );
 }
+
+export function fetchCatByBreed(breedId) {
+  return fetch(
+    `https://api.thecatapi.com/v1/images/search?api_key=${ApiKey}&breed_ids=${breedId}`
+  ).then(resp => {
+    if (!resp.ok) {
+      throw new Error(resp.status);
+    }
+    return resp.json();
+  });
+}
