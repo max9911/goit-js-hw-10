@@ -2,6 +2,10 @@ import { fetchBreeds } from './cat-api';
 import Notiflix from 'notiflix';
 import { fetchCatByBreed } from './cat-api';
 
+Notiflix.Notify.init({
+  timeout: 5000,
+});
+
 const elements = {
   select: document.querySelector('.breed-select'),
   page: document.querySelector('.cat-info'),
@@ -28,12 +32,13 @@ fetchBreeds()
     elements.select.classList.value = 'breed-select';
   })
   .catch(error => {
-    Notiflix.Notify.failure(`ERROR fetching - ${error}`);
+    Notiflix.Notify.failure(`OOOPPSS  ERROR fetching - ${error}`);
   });
 
 elements.select.addEventListener('change', loadBreed);
 
 function loadBreed(evt) {
+  elements.page.classList.value = 'cat-info hidden';
   elements.loader.classList.value = 'loadOne loader';
 
   fetchCatByBreed(evt.target.value)
@@ -55,6 +60,8 @@ function loadBreed(evt) {
       elements.page.classList.value = 'cat-info';
     })
     .catch(error => {
+      elements.page.classList.value = 'cat-info hidden';
+      elements.loader.classList.value = 'loadOne loader hidden';
       Notiflix.Notify.failure(`ERROR fetching - ${error}`);
     });
 }
